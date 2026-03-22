@@ -3,8 +3,8 @@
    Prix par véhicule, tout compris 7 pax
    ============================================ */
 
-const PRICES = { beauvais: 90, cdg: 65, orly: 65 };
-const LABELS = { beauvais: 'Beauvais-Tillé', cdg: 'Charles de Gaulle', orly: 'Orly' };
+const PRICES = { beauvais: 90, cdg: 65 };
+const LABELS = { beauvais: 'Beauvais-Tillé', cdg: 'Charles de Gaulle' };
 const WA = '33651161440';
 
 document.addEventListener('DOMContentLoaded', () => {
