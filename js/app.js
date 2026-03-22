@@ -3,8 +3,12 @@
    Prix par véhicule, tout compris 7 pax
    ============================================ */
 
-const PRICES = { beauvais: 90, cdg: 65 };
-const LABELS = { beauvais: 'Beauvais-Tillé', cdg: 'Charles de Gaulle' };
+const PRICES = {
+    'valdoise-cdg': 60, 'valdoise-beauvais': 90,
+    'parisnord-cdg': 70, 'parisnord-beauvais': 100
+};
+const ZONE_LABELS = { valdoise: "Val d'Oise", parisnord: 'Paris Nord' };
+const AIRPORT_LABELS = { cdg: 'Charles de Gaulle (CDG)', beauvais: 'Beauvais-Tillé (BVA)' };
 const WA = '33651161440';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,21 +48,21 @@ function initPills() {
     });
 }
 
-// --- Airport change -> instant price ---
+// --- Zone/Airport change -> instant price ---
 function initAirportChange() {
-    const sel = document.getElementById('airport');
-    sel.addEventListener('change', updateInstantPrice);
+    document.getElementById('airport').addEventListener('change', updateInstantPrice);
+    document.getElementById('zone').addEventListener('change', updateInstantPrice);
     updateInstantPrice();
 }
 
 function updateInstantPrice() {
-    const airport = document.getElementById('airport').value;
-    const price = PRICES[airport];
-    document.getElementById('ipAmount').textContent = price + '€';
+    document.getElementById('ipAmount').textContent = getPrice() + '€';
 }
 
 function getPrice() {
-    return PRICES[document.getElementById('airport').value] || 90;
+    const zone = document.getElementById('zone').value;
+    const airport = document.getElementById('airport').value;
+    return PRICES[zone + '-' + airport] || 70;
 }
 
 // --- Card formatting ---
@@ -94,8 +98,9 @@ function validate(ids) {
 
 function getRouteLabel() {
     const r = document.querySelector('input[name="route"]:checked').value;
-    const a = LABELS[document.getElementById('airport').value];
-    return r === 'aeroport-paris' ? `${a} → Paris` : `Paris → ${a}`;
+    const z = ZONE_LABELS[document.getElementById('zone').value];
+    const a = AIRPORT_LABELS[document.getElementById('airport').value];
+    return r === 'aeroport-paris' ? `${a} → ${z}` : `${z} → ${a}`;
 }
 
 function fmtDate(s) {
