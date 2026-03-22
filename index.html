@@ -195,26 +195,17 @@
                         </div>
 
                         <div class="fg">
-                            <label>Trajet</label>
-                            <select id="trajet" name="trajet" required>
-                                <optgroup label="Val d'Oise (95)">
-                                    <option value="valdoise-cdg">Val d'Oise ↔ CDG — 60€</option>
-                                    <option value="valdoise-beauvais">Val d'Oise ↔ Beauvais — 90€</option>
-                                </optgroup>
-                                <optgroup label="Paris Nord">
-                                    <option value="parisnord-cdg">Paris Nord ↔ CDG — 70€</option>
-                                    <option value="parisnord-beauvais">Paris Nord ↔ Beauvais — 100€</option>
-                                </optgroup>
-                                <optgroup label="Paris Sud">
-                                    <option value="parissud-cdg">Paris Sud ↔ CDG — 80€</option>
-                                    <option value="parissud-beauvais">Paris Sud ↔ Beauvais — 110€</option>
-                                </optgroup>
-                            </select>
+                            <label>Votre adresse</label>
+                            <input type="text" id="address" placeholder="Ex: 15 Rue de Rivoli, 75001 Paris" required>
+                            <div class="zone-detect" id="zoneDetect"></div>
                         </div>
 
                         <div class="fg">
-                            <label>Adresse précise</label>
-                            <input type="text" id="address" placeholder="Ex: 15 Rue de Rivoli, 75001 Paris" required>
+                            <label>Aéroport</label>
+                            <select id="airport" name="airport" required>
+                                <option value="cdg">Charles de Gaulle (CDG)</option>
+                                <option value="beauvais">Beauvais-Tillé (BVA)</option>
+                            </select>
                         </div>
 
                         <div class="fr">
@@ -254,8 +245,8 @@
 
                         <!-- Instant price -->
                         <div class="instant-price" id="instantPrice">
-                            <span class="ip-label">Prix total — van privé 7 places</span>
-                            <span class="ip-amount" id="ipAmount">90€</span>
+                            <span class="ip-label">Prix total — véhicule privé 7 places</span>
+                            <span class="ip-amount" id="ipAmount">—</span>
                         </div>
 
                         <button type="button" class="btn-main" onclick="goStep(2)">Continuer <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>

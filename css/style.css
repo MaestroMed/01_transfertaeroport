@@ -266,6 +266,13 @@ a{color:inherit;text-decoration:none}
     .hero h1{font-size:22px}
 }
 
+/* ============= ZONE DETECT ============= */
+.zone-detect{margin-top:4px;font-size:11px;font-weight:600;min-height:18px;transition:.2s}
+.zone-detect.found{color:var(--green)}
+.zone-detect.unknown{color:#f59e0b}
+.zone-detect .zone-tag{display:inline-block;padding:2px 8px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2);border-radius:4px;margin-right:4px}
+.zone-detect.unknown .zone-tag{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)}
+
 /* ============= STEP INDICATOR ============= */
 .step-indicator{display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .si-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--t3);transition:.2s}

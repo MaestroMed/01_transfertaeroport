@@ -8,8 +8,34 @@ const PRICES = {
     'parisnord-cdg': 70, 'parisnord-beauvais': 100,
     'parissud-cdg': 80, 'parissud-beauvais': 110
 };
-const ZONE_LABELS = { valdoise: "Val d'Oise", parisnord: 'Paris Nord', parissud: 'Paris Sud' };
-const AIRPORT_LABELS = { cdg: 'Charles de Gaulle (CDG)', beauvais: 'Beauvais-Tillé (BVA)' };
+const ZONE_NAMES = { valdoise: "Val d'Oise (95)", parisnord: 'Paris Nord', parissud: 'Paris Sud' };
+
+// Codes postaux Paris Nord : 75009-75012, 75017-75019, 93xxx, 92xxx nord
+// Codes postaux Paris Sud : 75005-75008, 75013-75016, 75020, 94xxx, 92xxx sud
+// Val d'Oise : 95xxx
+const PARIS_NORD_CP = ['75009','75010','75011','75012','75017','75018','75019'];
+const PARIS_SUD_CP = ['75001','75002','75003','75004','75005','75006','75007','75008','75013','75014','75015','75016','75020'];
+
+function detectZone(address) {
+    const cp = address.match(/\b(75\d{3}|9[2345]\d{3}|60\d{3}|77\d{3}|78\d{3}|91\d{3})\b/);
+    if (!cp) return null;
+    const code = cp[1];
+    const dept = code.substring(0, 2);
+
+    if (dept === '95') return 'valdoise';
+    if (PARIS_NORD_CP.includes(code)) return 'parisnord';
+    if (PARIS_SUD_CP.includes(code)) return 'parissud';
+    if (dept === '93') return 'parisnord';
+    if (dept === '94' || dept === '91') return 'parissud';
+    if (dept === '92') {
+        // 92 nord vs sud : Asnières, Clichy, Gennevilliers = nord / Boulogne, Issy = sud
+        const num = parseInt(code);
+        return num <= 92400 ? 'parissud' : 'parisnord';
+    }
+    if (dept === '60') return 'valdoise'; // Oise, proche Beauvais
+    if (dept === '77' || dept === '78') return 'parissud';
+    return null;
+}
 const WA = '33651161440';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,18 +75,51 @@ function initPills() {
     });
 }
 
-// --- Trajet change -> instant price ---
+// --- Address + Airport -> auto zone + price ---
+let currentZone = null;
+
 function initAirportChange() {
-    document.getElementById('trajet').addEventListener('change', updateInstantPrice);
+    const addressInput = document.getElementById('address');
+    const airportSelect = document.getElementById('airport');
+    let debounceTimer;
+
+    addressInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            currentZone = detectZone(addressInput.value);
+            const el = document.getElementById('zoneDetect');
+            if (currentZone) {
+                el.className = 'zone-detect found';
+                el.innerHTML = `<span class="zone-tag">${ZONE_NAMES[currentZone]}</span> Zone détectée — tarif ajusté`;
+            } else if (addressInput.value.length > 5) {
+                el.className = 'zone-detect unknown';
+                el.innerHTML = `<span class="zone-tag">?</span> Entrez un code postal pour calculer le tarif`;
+            } else {
+                el.className = 'zone-detect';
+                el.innerHTML = '';
+            }
+            updateInstantPrice();
+        }, 300);
+    });
+
+    airportSelect.addEventListener('change', updateInstantPrice);
     updateInstantPrice();
 }
 
 function updateInstantPrice() {
-    document.getElementById('ipAmount').textContent = getPrice() + '€';
+    const price = getPrice();
+    const el = document.getElementById('ipAmount');
+    if (price) {
+        el.textContent = price + '€';
+    } else {
+        el.textContent = '—';
+    }
 }
 
 function getPrice() {
-    return PRICES[document.getElementById('trajet').value] || 70;
+    if (!currentZone) return null;
+    const airport = document.getElementById('airport').value;
+    return PRICES[currentZone + '-' + airport] || null;
 }
 
 // --- Card formatting ---
@@ -75,7 +134,16 @@ function initCardFormat() {
 
 // --- Steps ---
 function goStep(n) {
-    if (n === 2 && !validate(['address', 'date', 'time'])) return;
+    if (n === 2) {
+        if (!validate(['address', 'date', 'time'])) return;
+        if (!currentZone) {
+            const el = document.getElementById('zoneDetect');
+            el.className = 'zone-detect unknown';
+            el.innerHTML = '<span class="zone-tag">?</span> Veuillez inclure un code postal dans votre adresse (ex: 95200, 75018...)';
+            document.getElementById('address').focus();
+            return;
+        }
+    }
     document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
     document.getElementById('step' + n).classList.add('active');
     if (n === 2) updateRecap();
@@ -94,17 +162,10 @@ function validate(ids) {
     return true;
 }
 
-const TRAJET_LABELS = {
-    'valdoise-cdg': "Val d'Oise ↔ CDG", 'valdoise-beauvais': "Val d'Oise ↔ Beauvais",
-    'parisnord-cdg': 'Paris Nord ↔ CDG', 'parisnord-beauvais': 'Paris Nord ↔ Beauvais',
-    'parissud-cdg': 'Paris Sud ↔ CDG', 'parissud-beauvais': 'Paris Sud ↔ Beauvais'
-};
-
 function getRouteLabel() {
-    const trajet = document.getElementById('trajet').value;
     const r = document.querySelector('input[name="route"]:checked').value;
-    const label = TRAJET_LABELS[trajet] || trajet;
-    const [zone, airport] = label.split(' ↔ ');
+    const zone = currentZone ? ZONE_NAMES[currentZone] : '?';
+    const airport = document.getElementById('airport').value === 'cdg' ? 'CDG' : 'Beauvais';
     return r === 'aeroport-paris' ? `${airport} → ${zone}` : `${zone} → ${airport}`;
 }
 
