@@ -5,9 +5,10 @@
 
 const PRICES = {
     'valdoise-cdg': 60, 'valdoise-beauvais': 90,
-    'parisnord-cdg': 70, 'parisnord-beauvais': 100
+    'parisnord-cdg': 70, 'parisnord-beauvais': 100,
+    'parissud-cdg': 80, 'parissud-beauvais': 110
 };
-const ZONE_LABELS = { valdoise: "Val d'Oise", parisnord: 'Paris Nord' };
+const ZONE_LABELS = { valdoise: "Val d'Oise", parisnord: 'Paris Nord', parissud: 'Paris Sud' };
 const AIRPORT_LABELS = { cdg: 'Charles de Gaulle (CDG)', beauvais: 'Beauvais-Tillé (BVA)' };
 const WA = '33651161440';
 
@@ -48,10 +49,9 @@ function initPills() {
     });
 }
 
-// --- Zone/Airport change -> instant price ---
+// --- Trajet change -> instant price ---
 function initAirportChange() {
-    document.getElementById('airport').addEventListener('change', updateInstantPrice);
-    document.getElementById('zone').addEventListener('change', updateInstantPrice);
+    document.getElementById('trajet').addEventListener('change', updateInstantPrice);
     updateInstantPrice();
 }
 
@@ -60,9 +60,7 @@ function updateInstantPrice() {
 }
 
 function getPrice() {
-    const zone = document.getElementById('zone').value;
-    const airport = document.getElementById('airport').value;
-    return PRICES[zone + '-' + airport] || 70;
+    return PRICES[document.getElementById('trajet').value] || 70;
 }
 
 // --- Card formatting ---
@@ -96,11 +94,18 @@ function validate(ids) {
     return true;
 }
 
+const TRAJET_LABELS = {
+    'valdoise-cdg': "Val d'Oise ↔ CDG", 'valdoise-beauvais': "Val d'Oise ↔ Beauvais",
+    'parisnord-cdg': 'Paris Nord ↔ CDG', 'parisnord-beauvais': 'Paris Nord ↔ Beauvais',
+    'parissud-cdg': 'Paris Sud ↔ CDG', 'parissud-beauvais': 'Paris Sud ↔ Beauvais'
+};
+
 function getRouteLabel() {
+    const trajet = document.getElementById('trajet').value;
     const r = document.querySelector('input[name="route"]:checked').value;
-    const z = ZONE_LABELS[document.getElementById('zone').value];
-    const a = AIRPORT_LABELS[document.getElementById('airport').value];
-    return r === 'aeroport-paris' ? `${a} → ${z}` : `${z} → ${a}`;
+    const label = TRAJET_LABELS[trajet] || trajet;
+    const [zone, airport] = label.split(' ↔ ');
+    return r === 'aeroport-paris' ? `${airport} → ${zone}` : `${zone} → ${airport}`;
 }
 
 function fmtDate(s) {
