@@ -245,6 +245,9 @@ a{color:inherit;text-decoration:none}
     .hp-price{font-size:24px}
     .usp-grid{flex-direction:column;align-items:center;gap:10px}
     .features-grid{grid-template-columns:1fr}
+    .how-arrow{display:none}
+    .how-grid{flex-direction:column;align-items:center}
+    .how-step{max-width:100%;width:100%}
     .ft-top{grid-template-columns:1fr}
     .ft-bot{flex-direction:column;text-align:center}
     .ft-legal{justify-content:center}
@@ -258,6 +261,35 @@ a{color:inherit;text-decoration:none}
     .fr{grid-template-columns:1fr}
     .hero h1{font-size:22px}
 }
+
+/* ============= STEP INDICATOR ============= */
+.step-indicator{display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.si-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--t3);transition:.2s}
+.si-dot.active{background:var(--accent);border-color:var(--accent);color:var(--white)}
+.si-dot.done{background:var(--green);border-color:var(--green);color:var(--white)}
+.si-line{width:28px;height:2px;background:var(--border);border-radius:2px}
+.si-line.filled{background:var(--green)}
+.si-label{font-size:11px;color:var(--t3);margin-left:8px}
+
+/* ============= SOCIAL PROOF BADGES ============= */
+.sp-badge{display:inline-block;padding:4px 10px;background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:6px;font-size:11px;font-weight:600;color:var(--t2)}
+
+/* ============= HOW IT WORKS ============= */
+.how-section{background:var(--dark2)}
+.how-grid{display:flex;align-items:flex-start;justify-content:center;gap:16px;flex-wrap:wrap}
+.how-step{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;flex:1;min-width:200px;max-width:280px}
+.how-num{width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--white);margin:0 auto 12px}
+.how-step h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.how-step p{font-size:13px;color:var(--t2);line-height:1.5}
+.how-arrow{display:flex;align-items:center;color:var(--accent);margin-top:40px}
+
+/* ============= COOKIE BANNER ============= */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:rgba(13,13,13,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9998;font-size:12px;color:var(--t2)}
+.cookie-banner.hidden{display:none}
+.cookie-banner p{margin:0;max-width:600px}
+.cookie-banner a{color:var(--accent);text-decoration:underline}
+.btn-cookie{padding:8px 20px;background:var(--accent);color:var(--white);border:none;border-radius:8px;font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;white-space:nowrap;transition:.2s}
+.btn-cookie:hover{background:var(--accent2)}
 
 ::selection{background:var(--accent);color:var(--white)}
 ::-webkit-scrollbar{width:6px}

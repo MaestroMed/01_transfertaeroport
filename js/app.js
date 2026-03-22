@@ -212,6 +212,15 @@ function initMobileMenu() {
     });
 }
 
+// --- Cookie banner ---
+function acceptCookies() {
+    document.getElementById('cookieBanner').classList.add('hidden');
+    try { localStorage.setItem('cookies_accepted', '1'); } catch(e) {}
+}
+(function() {
+    try { if (localStorage.getItem('cookies_accepted')) document.addEventListener('DOMContentLoaded', () => document.getElementById('cookieBanner')?.classList.add('hidden')); } catch(e) {}
+})();
+
 // --- Smooth scroll ---
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
