@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const communes = [...require('./data/communes.js'), ...require('./data/communes-extra.js'), ...require('./data/communes-final.js')];
 
-const SITE_URL = 'https://maestromed.github.io/01_transfertaeroport';
+const SITE_URL = 'https://01-transfert-aeroport.fr';
 const WA_LINK = 'https://wa.me/33651161440';
 const PHONE = '06 51 16 14 40';
 const OUTPUT = path.join(__dirname, '..', 'pages');
