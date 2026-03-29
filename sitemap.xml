@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://maestromed.github.io/01_transfertaeroport/</loc>
-        <lastmod>2026-03-22</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://maestromed.github.io/01_transfertaeroport/sitemap-main.xml</loc></sitemap>
+<sitemap><loc>https://maestromed.github.io/01_transfertaeroport/sitemap-pages-1.xml</loc></sitemap>
+<sitemap><loc>https://maestromed.github.io/01_transfertaeroport/sitemap-pages-2.xml</loc></sitemap>
+</sitemapindex>

@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://maestromed.github.io/01_transfertaeroport/sitemap.xml
