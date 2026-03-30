@@ -13,6 +13,8 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
 body{font-family:var(--font);color:var(--t1);background:var(--dark);line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url('img/paris-bg.jpg') center/cover no-repeat;opacity:.15;z-index:-2;pointer-events:none}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:var(--dark);opacity:.7;z-index:-1;pointer-events:none}
 a{color:inherit;text-decoration:none}
 .container{max-width:1140px;margin:0 auto;padding:0 20px}
 
@@ -70,7 +72,7 @@ a{color:inherit;text-decoration:none}
 .social-proof{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
 
 /* ============= BOOKING SECTION ============= */
-.booking-section{background:var(--dark);padding:60px 0 80px;position:relative}
+.booking-section{background:rgba(10,10,10,.85);padding:60px 0 80px;position:relative}
 .booking-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 .booking-container{max-width:500px;margin:0 auto}
 
@@ -134,13 +136,13 @@ a{color:inherit;text-decoration:none}
 .hidden{display:none!important}
 
 /* ============= USP BAR ============= */
-.usp-bar{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
+.usp-bar{background:rgba(17,17,17,.8);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
 .usp-grid{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .usp{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--t2)}
 .usp svg{color:var(--accent);flex-shrink:0}
 
 /* ============= SECTIONS ============= */
-.section{padding:80px 0}
+.section{padding:80px 0;background:rgba(10,10,10,.8)}
 .dark-section{background:var(--dark2)}
 .sh{text-align:center;margin-bottom:48px}
 .stag{display:inline-block;padding:5px 14px;background:var(--accentA);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:99px;margin-bottom:12px}
@@ -188,7 +190,7 @@ a{color:inherit;text-decoration:none}
 .cta-btns .btn-wa{border:1px solid rgba(255,255,255,.3)}
 
 /* ============= FOOTER ============= */
-.footer{background:var(--black);border-top:1px solid var(--border);padding:40px 0 20px}
+.footer{background:rgba(0,0,0,.85);border-top:1px solid var(--border);padding:40px 0 20px}
 .ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:28px}
 .ft-brand p{font-size:13px;color:var(--t3);margin-top:10px;line-height:1.5}
 .ft-col{display:flex;flex-direction:column;gap:6px}
@@ -286,7 +288,7 @@ a{color:inherit;text-decoration:none}
 .sp-badge{display:inline-block;padding:4px 10px;background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:6px;font-size:11px;font-weight:600;color:var(--t2)}
 
 /* ============= HOW IT WORKS ============= */
-.how-section{background:var(--dark2)}
+.how-section{background:rgba(17,17,17,.8)}
 .how-grid{display:flex;align-items:flex-start;justify-content:center;gap:16px;flex-wrap:wrap}
 .how-step{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:28px 24px;text-align:center;flex:1;min-width:200px;max-width:280px}
 .how-num{width:40px;height:40px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--white);margin:0 auto 12px}
