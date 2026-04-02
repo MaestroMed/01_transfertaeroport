@@ -83,24 +83,28 @@ function initAirportChange() {
     const airportSelect = document.getElementById('airport');
     let debounceTimer;
 
+    function detectAndUpdate() {
+        currentZone = detectZone(addressInput.value);
+        const el = document.getElementById('zoneDetect');
+        if (currentZone) {
+            el.className = 'zone-detect found';
+            el.innerHTML = `<span class="zone-tag">${ZONE_NAMES[currentZone]}</span> Zone détectée — tarif ajusté`;
+        } else if (addressInput.value.length > 5) {
+            el.className = 'zone-detect unknown';
+            el.innerHTML = `<span class="zone-tag">?</span> Entrez un code postal pour calculer le tarif`;
+        } else {
+            el.className = 'zone-detect';
+            el.innerHTML = '';
+        }
+        updateInstantPrice();
+    }
+
     addressInput.addEventListener('input', () => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            currentZone = detectZone(addressInput.value);
-            const el = document.getElementById('zoneDetect');
-            if (currentZone) {
-                el.className = 'zone-detect found';
-                el.innerHTML = `<span class="zone-tag">${ZONE_NAMES[currentZone]}</span> Zone détectée — tarif ajusté`;
-            } else if (addressInput.value.length > 5) {
-                el.className = 'zone-detect unknown';
-                el.innerHTML = `<span class="zone-tag">?</span> Entrez un code postal pour calculer le tarif`;
-            } else {
-                el.className = 'zone-detect';
-                el.innerHTML = '';
-            }
-            updateInstantPrice();
-        }, 300);
+        debounceTimer = setTimeout(detectAndUpdate, 300);
     });
+    addressInput.addEventListener('blur', detectAndUpdate);
+    addressInput.addEventListener('change', detectAndUpdate);
 
     airportSelect.addEventListener('change', updateInstantPrice);
     updateInstantPrice();
@@ -119,7 +123,9 @@ function updateInstantPrice() {
 function getPrice() {
     if (!currentZone) return null;
     const airport = document.getElementById('airport').value;
-    return PRICES[currentZone + '-' + airport] || null;
+    if (!airport) return null;
+    const key = currentZone + '-' + airport;
+    return PRICES[key] || null;
 }
 
 // --- Card formatting ---
