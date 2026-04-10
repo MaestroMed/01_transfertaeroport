@@ -244,7 +244,7 @@ ${notes ? '📝 ' + notes : ''}
 💰 *${price}€* (van 7 places, tout compris)
 💳 ${pay === 'card' ? 'Carte bancaire' : 'Espèces à bord'}
 ━━━━━━━━━━━━━━
-✅ Via 01transfert-aeroport.fr`;
+✅ Via 01-transfert-aeroport.fr`;
 
     window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
 }
