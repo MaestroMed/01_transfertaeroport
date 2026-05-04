@@ -60,10 +60,10 @@ export const metadata: Metadata = {
     siteName: "01 Transfert Aéroport",
     images: [
       {
-        url: "/img/paris-hero.jpg",
-        width: 1600,
-        height: 1067,
-        alt: "Pont Alexandre III à Paris au crépuscule",
+        url: "/img/highlander-paris.png",
+        width: 1900,
+        height: 1064,
+        alt: "Toyota Highlander 01 Transfert Aéroport devant la Tour Eiffel la nuit",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "01 Transfert Aéroport — Van privé 7 places",
     description: "Transfert VIP CDG · Beauvais. Prix fixe annoncé. Point.",
-    images: ["/img/paris-hero.jpg"],
+    images: ["/img/highlander-paris.png"],
   },
   icons: {
     icon: [
@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               url: "https://01-transfert-aeroport.fr",
               telephone: "+33651161440",
               email: "contact@01-transfert-aeroport.fr",
-              image: "https://01-transfert-aeroport.fr/img/paris-hero.jpg",
+              image: "https://01-transfert-aeroport.fr/img/highlander-paris.png",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "9 Rue d'Estienne d'Orves",
