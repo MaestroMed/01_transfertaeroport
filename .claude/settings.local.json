@@ -41,7 +41,11 @@
       "Bash(ls /c/Users/Miner/Desktop/Terrasse*/)",
       "Bash(curl -L -o /c/Users/Miner/01_transfert_aeroport/img/paris-bg-new.jpg \"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=85&fit=crop\")",
       "Bash(curl -L -o /c/Users/Miner/01_transfert_aeroport/img/test2.jpg \"https://images.unsplash.com/photo-1509439581779-6298f75bf6e5?w=1920&q=85&fit=crop\")",
-      "Bash(find /c/Users/Miner/Desktop/ -maxdepth 2 -type f \\\\\\(-name *.jpg -o -name *.png -o -name *.webp \\\\\\) -size +100k)"
+      "Bash(find /c/Users/Miner/Desktop/ -maxdepth 2 -type f \\\\\\(-name *.jpg -o -name *.png -o -name *.webp \\\\\\) -size +100k)",
+      "Bash(netstat -ano)",
+      "Bash(tasklist //FI \"PID eq 29624\")",
+      "Bash(taskkill //F //PID 29624)",
+      "Bash(ls /c/Users/Miner/01_transfert_aeroport/*.xml /c/Users/Miner/01_transfert_aeroport/CNAME /c/Users/Miner/01_transfert_aeroport/robots.txt)"
     ]
   }
 }

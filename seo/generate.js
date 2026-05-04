@@ -93,6 +93,8 @@ function htmlHead(title, desc, canonical, lang) {
     return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)} | 01 Transfert Aéroport</title>
