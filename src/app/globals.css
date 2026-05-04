@@ -32,7 +32,7 @@
   --font-sans:       "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
 
   /* Type scale fluide */
-  --text-hero:       clamp(2.75rem, 7vw + .5rem, 7.5rem);
+  --text-hero:       clamp(2rem, 4vw + .5rem, 4.5rem);
   --text-h2:         clamp(1.75rem, 2.5vw + 1rem, 3rem);
   --text-h3:         clamp(1.125rem, .8vw + 1rem, 1.5rem);
   --text-lead:       clamp(1.05rem, .5vw + .95rem, 1.25rem);
