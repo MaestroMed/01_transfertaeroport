@@ -36,10 +36,10 @@ export function Hero() {
           </div>
 
           <h1 className="text-hero font-display uppercase text-[var(--color-cream)] mb-6 lg:mb-8 [text-shadow:0_2px_24px_rgba(0,0,0,.5)]">
-            Paris à CDG.<br />
-            En 35 minutes.<br />
+            Vers l&apos;Aéroport.<br />
+            Dans les meilleurs<br />
             <span className="text-[var(--color-gold)]">
-              Sans stress<span className="text-[var(--color-gold)]">.</span>
+              délais<span className="text-[var(--color-gold)]">.</span>
             </span>
           </h1>
 
