@@ -44,7 +44,7 @@ export function Hero() {
           </h1>
 
           <p className="font-serif italic text-lead font-normal leading-snug text-[var(--color-cream-2)] mb-8 lg:mb-10 max-w-[560px] [text-shadow:0_1px_12px_rgba(0,0,0,.6)]">
-            Toyota Highlander 7 places<span className="text-[var(--color-gold)] mx-1.5">·</span>
+            Toyota Highlander 7 places Hybride<span className="text-[var(--color-gold)] mx-1.5">·</span>
             Suivi de vol au départ comme à l&apos;arrivée<span className="text-[var(--color-gold)] mx-1.5">·</span>
             Panneaux d&apos;attente<span className="text-[var(--color-gold)] mx-1.5">·</span>
             <em>Prix fixe annoncé.</em>
