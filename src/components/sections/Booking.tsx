@@ -34,11 +34,15 @@ export function Booking() {
   const [submitting, setSubmitting] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
-  // Default date = tomorrow
+  // Default : date = demain, heure = maintenant (le client peut modifier)
   useEffect(() => {
+    const now = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     setDate(tomorrow.toISOString().split("T")[0] ?? "");
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mm = String(now.getMinutes()).padStart(2, "0");
+    setTime(`${hh}:${mm}`);
   }, []);
 
   const zone: Zone | null = useMemo(() => detectZone(address), [address]);
