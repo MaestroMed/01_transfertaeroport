@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ============================================================
+   01 TRANSFERT AÉROPORT — Design System
+   Editorial Cinematic — Tailwind v4 @theme
+   ============================================================ */
+
+@theme {
+  /* Palette — Editorial Cinematic */
+  --color-ink:       #0A0907;
+  --color-ink-2:     #14110B;
+  --color-ink-3:     #1F1A11;
+
+  --color-gold:      #F5C842;
+  --color-gold-2:    #FFB800;
+  --color-gold-deep: #C99A2D;
+
+  --color-cream:     #F5EFD7;
+  --color-cream-2:   #E8DEB8;
+  --color-mute:      #8C8675;
+  --color-mute-2:    #5C574B;
+
+  --color-line:      rgba(245, 200, 66, 0.20);
+  --color-line-2:    rgba(245, 200, 66, 0.08);
+
+  --color-green:     #25D366;
+  --color-green-2:   #128C7E;
+
+  /* Typography stacks */
+  --font-display:    "Anton", "Bebas Neue", "Impact", sans-serif;
+  --font-serif:      "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-sans:       "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+
+  /* Type scale fluide */
+  --text-hero:       clamp(2.75rem, 7vw + .5rem, 7.5rem);
+  --text-h2:         clamp(1.75rem, 2.5vw + 1rem, 3rem);
+  --text-h3:         clamp(1.125rem, .8vw + 1rem, 1.5rem);
+  --text-lead:       clamp(1.05rem, .5vw + .95rem, 1.25rem);
+
+  /* Layout */
+  --container-max:   1240px;
+
+  /* Easing */
+  --ease-out:        cubic-bezier(.16, 1, .3, 1);
+  --ease-out-soft:   cubic-bezier(.25, .46, .45, .94);
+  --ease-spring:     cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-cream);
+    background: var(--color-ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in oklch, var(--color-gold) 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, color-mix(in oklch, var(--color-gold) 5%, transparent), transparent 70%),
+      var(--color-ink);
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: .95;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+  }
+
+  em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-cream-2);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
+
+  :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
+
+  img, picture, svg { display: block; max-width: 100%; }
+  button { cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+}
+
+@layer utilities {
+  .container-page {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: max(20px, 4vw);
+  }
+
+  .text-hero { font-size: var(--text-hero); line-height: .9; letter-spacing: -.02em; }
+  .text-h2 { font-size: var(--text-h2); }
+  .text-h3 { font-size: var(--text-h3); }
+  .text-lead { font-size: var(--text-lead); }
+
+  .font-display { font-family: var(--font-display); }
+  .font-serif { font-family: var(--font-serif); }
+
+  .glass {
+    background: color-mix(in oklch, var(--color-ink) 75%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .glow-gold { box-shadow: 0 0 32px color-mix(in oklch, var(--color-gold) 30%, transparent); }
+}
+
+/* ============= Scroll-driven animations (CSS native 2026) ============= */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+  @keyframes reveal-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+@supports not (animation-timeline: view()) {
+  .reveal { animation: reveal-up .8s var(--ease-out) both; }
+}
+
+/* ============= Live pulse ============= */
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-green) 60%, transparent); }
+  70% { box-shadow: 0 0 0 14px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--color-green);
+  animation: live-pulse 2s var(--ease-out) infinite;
+}
+
+/* ============= Reduced motion ============= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
